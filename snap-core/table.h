@@ -1027,6 +1027,44 @@ public:
   /// Gets the schema of this table.
   Schema GetSchema() { return DenormalizeSchema(); }
 
+/***** Value Setters - setValue(column name, physical row Idx, value) *****/
+	// No type checking. Assuming ColName actually refers to the right type.
+  /// Sets the value of integer attribute \c ColName at row \c RowIdx with \c Val.
+  void SetIntVal(const TStr& ColName, const TInt& RowIdx, const TInt& Val) {
+		IntCols[GetColIdx(ColName)][RowIdx] = Val;
+  }
+	/// Sets the value of integer attribute \c ColName at row \c RowIdx with \c Val.
+	void SetIntVal(const TStr& ColName, const TInt& RowIdx, const int Val) {
+		IntCols[GetColIdx(ColName)][RowIdx] = Val;
+	}
+  /// Sets the value of float attribute \c ColName at row \c RowIdx with \c Val.
+  void SetFltVal(const TStr& ColName, const TInt& RowIdx, const TFlt& Val) {
+		FltCols[GetColIdx(ColName)][RowIdx] = Val;
+  }
+	/// Sets the value of float attribute \c ColName at row \c RowIdx with \c Val.
+	void SetFltVal(const TStr& ColName, const TInt& RowIdx, const float Val) {
+		FltCols[GetColIdx(ColName)][RowIdx] = Val;
+	}
+
+/***** Value Setters - setValue(col idx, row Idx, value) *****/
+	// No type and bound checking
+	/// Set the integer value at column \c ColIdx and row \c RowIdx with \c Val.
+	void SetIntValAtRowIdx(const TInt& ColIdx, const TInt& RowIdx, const TInt& Val) {
+		IntCols[ColIdx][RowIdx] = Val;
+	}
+	/// Set the integer value at column \c ColIdx and row \c RowIdx with \c Val.
+	void SetIntValAtRowIdx(const TInt& ColIdx, const TInt& RowIdx, const int Val) {
+		IntCols[ColIdx][RowIdx] = Val;
+	}
+	/// Set the float value at column \c ColIdx and row \c RowIdx with \c Val.
+	void SetFltValAtRowIdx(const TInt& ColIdx, const TInt& RowIdx, const TFlt& Val) {
+		FltCols[ColIdx][RowIdx] = Val;
+	}
+	/// Set the float value at column \c ColIdx and row \c RowIdx with \c Val.
+	void SetFltValAtRowIdx(const TInt& ColIdx, const TInt& RowIdx, const float Val) {
+		FltCols[ColIdx][RowIdx] = Val;
+	}
+
 /***** Graph handling *****/
   /// Creates a sequence of graphs based on values of column SplitAttr and windows specified by JumpSize and WindowSize.
   TVec<PNEANet> ToGraphSequence(TStr SplitAttr, TAttrAggr AggrPolicy,
